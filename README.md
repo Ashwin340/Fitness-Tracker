@@ -1,30 +1,22 @@
 # Fitness Tracker ??? 
  
-A *Fitness Tracker Project* developed by *Ashwin A S* to help users monitor their workouts, track calories, and stay motivated in their fitness journey. 
- 
---- 
+A *Fitness Tracker Project* developed by *Ashwin A S* to help users monitor workouts, calories, and track progress. 
  
 ## ?? Features 
 - Track daily workouts (running, cycling, gym, etc.) 
 - Monitor calories burned 
 - Log fitness goals and progress 
-- Simple and user-friendly interface 
- 
---- 
+- Simple user-friendly interface 
  
 ## ?? Tech Stack 
-- *Frontend:* HTML, CSS, JavaScript 
-- *Backend:* Node.js / Express (if implemented) 
-- *Database:* MongoDB (if implemented) 
+- Frontend: HTML, CSS, JS 
+- Backend: Node.js + Express 
+- Database: MongoDB 
  
---- 
+## ?? Setup 
+1. Clone repo 
+2. Install Node.js dependencies 
+3. Run server 
  
-## ?? Project Setup 
-1. Clone this repository 
-bash 
-git clone https://github.com/Ashwin340/Fitness-Tracker.git 
-ECHO is on.
- 
-## ?? Author 
-- *Ashwin A S* 
-- GitHub: [Ashwin340](https://github.com/Ashwin340) 
+## Author 
+Ashwin A S 
