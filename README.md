@@ -14,7 +14,7 @@ A *Fitness Tracker Project* developed by *Ashwin A S* to help users monitor work
 - Database: MongoDB 
  
 ## ?? Setup 
-1. Clone repo 
+1. repo 
 2. Install Node.js dependencies 
 3. Run server 
  

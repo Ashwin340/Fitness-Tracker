@@ -1,10 +1,51 @@
-const express = require('express');echo const mongoose = require('mongoose');echo const cors = require('cors');echo const bodyParser = require('body-parser');echo const app = express();echo const PORT = 3000;echo. 
-app.use(cors());echo app.use(bodyParser.json());echo. 
-// Workout Schemaecho const workoutSchema = new mongoose.Schema({ workout: Number, calories: Number });echo const Workout = mongoose.model('Workout', workoutSchema);echo. 
-// Routesecho app.post('/add', async (req, res) = const { workout, calories } = req.body; const newWorkout = new Workout({ workout, calories }); await newWorkout.save(); res.send({ message: 'Workout added', data: newWorkout }); });echo app.get('/history', async (req, res) = const data = await Workout.find(); res.send(data); });echo. 
-app.listen(PORT, () = running on http://localhost:${PORT})); 
-const express = require('express');echo const mongoose = require('mongoose');echo const cors = require('cors');echo const bodyParser = require('body-parser');echo const app = express();echo const PORT = 3000;echo. 
-app.use(cors());echo app.use(bodyParser.json());echo. 
-// Workout Schemaecho const workoutSchema = new mongoose.Schema({ workout: Number, calories: Number });echo const Workout = mongoose.model('Workout', workoutSchema);echo. 
-// Routesecho app.post('/add', async (req, res) = const { workout, calories } = req.body; const newWorkout = new Workout({ workout, calories }); await newWorkout.save(); res.send({ message: 'Workout added', data: newWorkout }); });echo app.get('/history', async (req, res) = const data = await Workout.find(); res.send(data); });echo. 
-app.listen(PORT, () = running on http://localhost:${PORT})); 
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+
+const app = express();
+const PORT = 3000;
+
+// Middleware
+app.use(bodyParser.json());
+app.use(express.static('public')); // serve frontend
+
+// ✅ Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/fitnessDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ Connected to MongoDB"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
+
+// ✅ Define Schema
+const workoutSchema = new mongoose.Schema({
+  workout: Number,
+  calories: Number,
+  date: { type: Date, default: Date.now }
+});
+
+const Workout = mongoose.model('Workout', workoutSchema);
+
+// ✅ API Routes
+app.post('/api/add', async (req, res) => {
+  try {
+    const newWorkout = new Workout(req.body);
+    await newWorkout.save();
+    res.json({ message: "Workout saved!", workout: newWorkout });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/history', async (req, res) => {
+  try {
+    const history = await Workout.find().sort({ date: -1 });
+    res.json(history);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Start server
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
